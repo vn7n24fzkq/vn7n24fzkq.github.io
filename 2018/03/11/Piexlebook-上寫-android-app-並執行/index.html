@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-TW,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vn7n24fzkq.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本篇文章適用於已經用 crouton 裝好 ubutun ，且已經有 GUI 環境的開發者,如果還沒裝好可以去看我之前的教學文章。 點擊查看  下載 android studio for linux  官方載點  解壓縮 android studio   Ctrl+Alt+Tab 後輸入 shell  使用gui直接解壓縮   1$ sudo startxfce4   透過 Ctrl+Alt+Sh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 pixelbook 上寫 android app 並執行">
+<meta property="og:url" content="https://vn7n24fzkq.github.io/2018/03/11/Piexlebook-%E4%B8%8A%E5%AF%AB-android-app-%E4%B8%A6%E5%9F%B7%E8%A1%8C/index.html">
+<meta property="og:site_name" content="vn7&#39;blog">
+<meta property="og:description" content="本篇文章適用於已經用 crouton 裝好 ubutun ，且已經有 GUI 環境的開發者,如果還沒裝好可以去看我之前的教學文章。 點擊查看  下載 android studio for linux  官方載點  解壓縮 android studio   Ctrl+Alt+Tab 後輸入 shell  使用gui直接解壓縮   1$ sudo startxfce4   透過 Ctrl+Alt+Sh">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2018-03-11T13:26:13.000Z">
+<meta property="article:modified_time" content="2021-03-15T13:30:34.726Z">
+<meta property="article:author" content="vn7n24fzkq">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="chrome OS">
+<meta property="article:tag" content="chrome book">
+<meta property="article:tag" content="pixelbook">
+<meta property="article:tag" content="android studio">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://vn7n24fzkq.github.io/2018/03/11/Piexlebook-%E4%B8%8A%E5%AF%AB-android-app-%E4%B8%A6%E5%9F%B7%E8%A1%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>在 pixelbook 上寫 android app 並執行 | vn7'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">vn7'blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>網站地圖</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://vn7n24fzkq.github.io/2018/03/11/Piexlebook-%E4%B8%8A%E5%AF%AB-android-app-%E4%B8%A6%E5%9F%B7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/20241522">
+      <meta itemprop="name" content="vn7n24fzkq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vn7'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在 pixelbook 上寫 android app 並執行
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2018-03-11 21:26:13" itemprop="dateCreated datePublished" datetime="2018-03-11T21:26:13+08:00">2018-03-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-15 21:30:34" itemprop="dateModified" datetime="2021-03-15T21:30:34+08:00">2021-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Chrome-OS/" itemprop="url" rel="index"><span itemprop="name">Chrome OS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本篇文章適用於已經用 crouton 裝好 ubutun ，且已經有 GUI 環境的開發者,如果還沒裝好可以去看我之前的教學文章。</p>
+<a href="/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/" title="點擊查看">點擊查看</a>
+<ul>
+<li>下載 android studio for linux</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developer.android.com/studio/index.html#downloads">官方載點</a></p>
+<ul>
+<li><p>解壓縮 android studio</p>
+<p>  Ctrl+Alt+Tab 後輸入 shell</p>
+<ul>
+<li><p>使用gui直接解壓縮</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo startxfce4</span></span><br></pre></td></tr></table></figure>
+<p>  透過 Ctrl+Alt+Shift+Back 來切換畫面</p>
+<p>  然後找到下載的地方右鍵解壓縮</p>
+</li>
+<li><p>使用命令行解壓縮</p>
+<p>  cd到你下載的地方,chrome OS 下應該是 Downloads</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/Downloads/</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> unzip android-stusio-ide-*-linux-zip</span></span><br></pre></td></tr></table></figure>
+<p>  *字看狀況可以自行更換成下載對應的版本</p>
+</li>
+</ul>
+</li>
+<li><p>安裝 android studio</p>
+<ul>
+<li><p>使用gui安裝</p>
+<p>  找到解縮的資料夾 android-studio</p>
+<p>  底下有 bin 資料夾</p>
+<p>  進入後執行裡面的 studio.sh</p>
+</li>
+<li><p>使用命令行安裝</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sh ~/Downloads/android-studio/bin/studio.sh</span></span><br></pre></td></tr></table></figure>
+<p>  *字看狀況可以自行更換成下載對應的版本</p>
+</li>
+</ul>
+</li>
+<li><p>設定 Command-line-launcher</p>
+<p>  安裝完後點選開啟一個新專案</p>
+<p>  開好後點選 </p>
+<p>  Tools -&gt; Create Command line Launcher</p>
+<p>  Tools -&gt; Create Desktop Entry</p>
+<p>  開啟命令列確定有安裝 python</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install python</span><br></pre></td></tr></table></figure></li>
+<li><p>啟動 android studio</p>
+<p>  關掉 android studio ，現在來確認可以開啟</p>
+<p>  command line 輸入</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ studio</span><br></pre></td></tr></table></figure>
+<p>  或是左上角 Applications -&gt; Development -&gt; Android Studio</p>
+<ul>
+<li>有安裝 xiwi</li>
+</ul>
+<p>  退到 chrome 桌面</p>
+<p>  Ctrl+Alt+Tab 後輸入 shell</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo enter-chroot xiwi studio</span><br></pre></td></tr></table></figure></li>
+<li><p>透過 ADB 測試 app</p>
+<p>  開啟Chrome terminal (Ctrl+Alt+Tab 輸入 shell)</p>
+<p>  不想跟著步驟可以自己看著官方教學做 我下面是整理好的步驟<a target="_blank" rel="noopener" href="https://developer.android.com/topic/arc/index.html#setup">官方教學(英文)</a></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo crossystem dev_boot_signed_only=0</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /usr/libexec/debugd/helpers/dev_features_rootfs_verification</span><br></pre></td></tr></table></figure>
+<p>  執行下面這部會重開機，記得要 Ctrl+D 來進入</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo reboot</span><br></pre></td></tr></table></figure>
+
+<p>  再次開啟Chrome terminal (Ctrl+Alt+T 輸入 shell)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /usr/libexec/debugd/helpers/dev_features_ssh</span><br></pre></td></tr></table></figure></li>
+<li><p>開啟 Pixelbook 裡 Android settings 下的 ADB Debugging</p>
+<ul>
+<li>點擊右下角時鐘</li>
+<li>點開設定</li>
+<li>往下滑，找到Google Play Stores</li>
+<li>進入找到 Manage Android preferences</li>
+<li>往下找到 About device 進入</li>
+<li>點擊 build number 七次來開啟開發者模式</li>
+<li>點擊左上返回</li>
+<li>進入開發者選項 ( Developer Options )</li>
+<li>啟用 ADB debugging</li>
+</ul>
+</li>
+<li><p>ADB 連接</p>
+<p>  進入 Chrome terminal (Ctrl+Alt+T 輸入 shell)</p>
+<ul>
+<li>ADB 連接<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ adb connect localhost:22</span><br></pre></td></tr></table></figure>
+正常運作會顯示 connected to localhost:22</li>
+</ul>
+<p>  如果沒顯示，設定可能有錯</p>
+<ul>
+<li>測試 android studio 連接 adb</li>
+</ul>
+<p>  先重啟adb</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ shell adb kill-server</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ adb connect localhost:22</span><br></pre></td></tr></table></figure>
+<p>  xiwi 啟動 android studio</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo enter-chroot xiwi studio</span><br></pre></td></tr></table></figure>
+<p>  直接 run 應該可以看到 Pixelbook 出現在列表上了</p>
+<p>  這時候就可以直接在 Pixelbook 上安裝及測試</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+              <a href="/tags/chrome-OS/" rel="tag"># chrome OS</a>
+              <a href="/tags/chrome-book/" rel="tag"># chrome book</a>
+              <a href="/tags/pixelbook/" rel="tag"># pixelbook</a>
+              <a href="/tags/android-studio/" rel="tag"># android studio</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/11/hexo-d-%E6%99%82%E7%99%BC%E7%94%9F-ENOSPC-%E9%8C%AF%E8%AA%A4/" rel="prev" title="hexo d 時發生 ENOSPC 錯誤">
+      <i class="fa fa-chevron-left"></i> hexo d 時發生 ENOSPC 錯誤
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/14/%E5%9C%A8GCP%E4%B8%8A%E5%BB%BA%E7%AB%8B%E9%A1%8D%E5%A4%96%E7%9A%84SSH-SERVER/" rel="next" title="在GCP上建立額外的SSH-SERVER">
+      在GCP上建立額外的SSH-SERVER <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="vn7n24fzkq"
+      src="https://avatars.githubusercontent.com/u/20241522">
+  <p class="site-author-name" itemprop="name">vn7n24fzkq</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vn7n24fzkq" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vn7n24fzkq" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:vn7n24fzkq@gmail.com" title="E-Mail → mailto:vn7n24fzkq@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by vn7n24fzkq</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-TW,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"vn7n24fzkq.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="今年入手了pixelbook，利用時間把建構開發環境的步驟整理出來  1.將chrome os開啟開發者模式(注意，這個步驟會清除原本的所有資料)   同時按下esc + refesh + 電源鍵   refesh就是最右邊那個    接下來按 Ctrl + D   注意：畫面上不會有任何提示,你自己要知道要這樣做,每次開機都要按   當然你也可以按照開機畫面的教學隨時關閉開發者模式,要注意的是每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在pixelbook上建置開發環境">
+<meta property="og:url" content="https://vn7n24fzkq.github.io/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/index.html">
+<meta property="og:site_name" content="vn7&#39;blog">
+<meta property="og:description" content="今年入手了pixelbook，利用時間把建構開發環境的步驟整理出來  1.將chrome os開啟開發者模式(注意，這個步驟會清除原本的所有資料)   同時按下esc + refesh + 電源鍵   refesh就是最右邊那個    接下來按 Ctrl + D   注意：畫面上不會有任何提示,你自己要知道要這樣做,每次開機都要按   當然你也可以按照開機畫面的教學隨時關閉開發者模式,要注意的是每">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://vn7n24fzkq.github.io/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/pixelbook_refresh_key.jpg">
+<meta property="article:published_time" content="2018-02-26T17:48:45.000Z">
+<meta property="article:modified_time" content="2021-03-15T16:16:32.098Z">
+<meta property="article:author" content="vn7n24fzkq">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="chrome OS">
+<meta property="article:tag" content="chrome book">
+<meta property="article:tag" content="pixelbook">
+<meta property="article:tag" content="crouton">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vn7n24fzkq.github.io/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/pixelbook_refresh_key.jpg">
+
+<link rel="canonical" href="https://vn7n24fzkq.github.io/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>在pixelbook上建置開發環境 | vn7'blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">vn7'blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>關於</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>標籤<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分類<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>歸檔<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>網站地圖</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://vn7n24fzkq.github.io/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/20241522">
+      <meta itemprop="name" content="vn7n24fzkq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vn7'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在pixelbook上建置開發環境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2018-02-27 01:48:45" itemprop="dateCreated datePublished" datetime="2018-02-27T01:48:45+08:00">2018-02-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-16 00:16:32" itemprop="dateModified" datetime="2021-03-16T00:16:32+08:00">2021-03-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Chrome-OS/" itemprop="url" rel="index"><span itemprop="name">Chrome OS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>今年入手了pixelbook，利用時間把建構開發環境的步驟整理出來</p>
+<hr>
+<h3 id="1-將chrome-os開啟開發者模式"><a href="#1-將chrome-os開啟開發者模式" class="headerlink" title="1.將chrome os開啟開發者模式"></a>1.將chrome os開啟開發者模式</h3><p>(注意，這個步驟會清除原本的所有資料)</p>
+<ul>
+<li> 同時按下esc + refesh + 電源鍵</li>
+</ul>
+<p> refesh就是最右邊那個<br> <img src="/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/pixelbook_refresh_key.jpg"></p>
+<ul>
+<li> 接下來按 Ctrl + D</li>
+</ul>
+<blockquote>
+<p>注意：畫面上不會有任何提示,你自己要知道要這樣做,每次開機都要按</p>
+</blockquote>
+<blockquote>
+<p>當然你也可以按照開機畫面的教學隨時關閉開發者模式,要注意的是每次這樣做都會清除系統資料</p>
+</blockquote>
+<h3 id="2-下載crouton"><a href="#2-下載crouton" class="headerlink" title="2.下載crouton"></a>2.下載crouton</h3><p>crouton及chroot<br>crouton是chrome os下通用的chroot環境<br>chroot則是unix系統下的一種操作環境</p>
+<p>將 crouton 下載到 Downloads 預設資料夾<br><a target="_blank" rel="noopener" href="https://goo.gl/fd3zc">下載crouton</a></p>
+<p>GitHub也可以找到Crouton<br><a target="_blank" rel="noopener" href="https://github.com/dnschneid/crouton">crouton on GitHub</a></p>
+<h3 id="3-安裝Ubuntu-LTS-with-Xfce"><a href="#3-安裝Ubuntu-LTS-with-Xfce" class="headerlink" title="3.安裝Ubuntu LTS with Xfce"></a>3.安裝Ubuntu LTS with Xfce</h3><ul>
+<li>  打開一個 terminal (Ctrl + Alt + T )</li>
+<li>  輸入 shell 按下 enter</li>
+<li>安裝xfce,安裝結束後輸入使用者名稱跟密碼  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sh~/Downloads/crouton -t xfce</span><br></pre></td></tr></table></figure>
+有任何做錯的可以直接用這兩個指令 在從這一步重新開始</li>
+</ul>
+<p>1.顯示所有安裝的chroot<br>2.刪除指定的chroot( chrootname 換成要刪除的那個,預設安裝名稱是 xenial )</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo edit-chroot -a</span><br><span class="line">$ sudo edit-chroot -d chrootname</span><br></pre></td></tr></table></figure>
+
+<p>到這裡已經完成了大部分的步驟</p>
+<h3 id="4-成為ubuntu大神"><a href="#4-成為ubuntu大神" class="headerlink" title="4.成為ubuntu大神"></a>4.成為ubuntu大神</h3><ul>
+<li><p>進入chroot</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo enter-chroot</span><br></pre></td></tr></table></figure></li>
+<li><p>開始安裝任何東西</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git</span><br><span class="line">$ sudo apt-get install curl</span><br></pre></td></tr></table></figure>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4></li>
+<li><p>在桌面開啟xfce</p>
+<ul>
+<li>  打開 terminal (Ctrl + Alt + T )</li>
+<li>  輸入 shell 按下 enter </li>
+<li>開啟xfce  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo enter-chroot startxfce4</span><br></pre></td></tr></table></figure>
+  或  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo startxfce4</span><br></pre></td></tr></table></figure>
+  用 Ctrl + Alt + Shift + Back 和 Ctrl + Alt + Shift + Forward 在 xfce 和 chrome os 的桌面切換</li>
+</ul>
+</li>
+<li><p>在 chrome tab 或一個新的視窗中開啟 xfce</p>
+<ul>
+<li>  在 chrome 中加入 <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/crouton-integration/gcpneefbbnfalgjniomfjknbcgkbijom">crouton integration</a></li>
+<li>安裝 xiwi 然後設置為預設的開啟方式<br>  xenail 換成 你 chroot 的名稱,xenial 是預設名稱  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo sh ~/Downloads/crouton -t xiwi -u -n xenial</span><br></pre></td></tr></table></figure></li>
+<li>在新視窗開啟 xfce  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xiwi startxfce4</span><br></pre></td></tr></table></figure>
+  在 chrome tab 開啟 xfce  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xiwi -t startxfce4</span><br></pre></td></tr></table></figure>
+也可以獨立開啟應用程式<br>像我使用 vscode<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ xiwi -t code</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p>這篇文章也是在 vscode 下完成的<br>剩下其他的設定下次在發篇文章</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+              <a href="/tags/chrome-OS/" rel="tag"># chrome OS</a>
+              <a href="/tags/chrome-book/" rel="tag"># chrome book</a>
+              <a href="/tags/pixelbook/" rel="tag"># pixelbook</a>
+              <a href="/tags/crouton/" rel="tag"># crouton</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/13/%E7%94%A8%E5%9B%9B%E5%8F%89%E6%A8%B9%E4%BE%86%E5%B0%8Dbmp%E8%88%87tiff%E5%AF%A6%E5%81%9A%E5%9C%96%E5%83%8F%E5%A3%93%E7%B8%AE/" rel="prev" title="用四叉樹來對bmp與tiff實做圖像壓縮">
+      <i class="fa fa-chevron-left"></i> 用四叉樹來對bmp與tiff實做圖像壓縮
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/03/11/hexo-d-%E6%99%82%E7%99%BC%E7%94%9F-ENOSPC-%E9%8C%AF%E8%AA%A4/" rel="next" title="hexo d 時發生 ENOSPC 錯誤">
+      hexo d 時發生 ENOSPC 錯誤 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%B0%87chrome-os%E9%96%8B%E5%95%9F%E9%96%8B%E7%99%BC%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">1.將chrome os開啟開發者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%8B%E8%BC%89crouton"><span class="nav-number">2.</span> <span class="nav-text">2.下載crouton</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%9DUbuntu-LTS-with-Xfce"><span class="nav-number">3.</span> <span class="nav-text">3.安裝Ubuntu LTS with Xfce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%88%90%E7%82%BAubuntu%E5%A4%A7%E7%A5%9E"><span class="nav-number">4.</span> <span class="nav-text">4.成為ubuntu大神</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Example"><span class="nav-number">4.1.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="vn7n24fzkq"
+      src="https://avatars.githubusercontent.com/u/20241522">
+  <p class="site-author-name" itemprop="name">vn7n24fzkq</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vn7n24fzkq" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vn7n24fzkq" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:vn7n24fzkq@gmail.com" title="E-Mail → mailto:vn7n24fzkq@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by vn7n24fzkq</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

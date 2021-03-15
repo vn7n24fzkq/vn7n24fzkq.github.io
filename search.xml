@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>在 pixelbook 上寫 android app 並執行</title>
+    <url>/2018/03/11/Piexlebook-%E4%B8%8A%E5%AF%AB-android-app-%E4%B8%A6%E5%9F%B7%E8%A1%8C/</url>
+    <content><![CDATA[<p>本篇文章適用於已經用 crouton 裝好 ubutun ，且已經有 GUI 環境的開發者,如果還沒裝好可以去看我之前的教學文章。</p>
+<a href="/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/" title="點擊查看">點擊查看</a>
+<ul>
+<li>下載 android studio for linux</li>
+</ul>
+<p><a href="https://developer.android.com/studio/index.html#downloads">官方載點</a></p>
+<ul>
+<li><p>解壓縮 android studio</p>
+<p>  Ctrl+Alt+Tab 後輸入 shell</p>
+<ul>
+<li><p>使用gui直接解壓縮</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo startxfce4</span></span><br></pre></td></tr></table></figure>
+<p>  透過 Ctrl+Alt+Shift+Back 來切換畫面</p>
+<p>  然後找到下載的地方右鍵解壓縮</p>
+</li>
+<li><p>使用命令行解壓縮</p>
+<p>  cd到你下載的地方,chrome OS 下應該是 Downloads</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> ~/Downloads/</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> unzip android-stusio-ide-*-linux-zip</span></span><br></pre></td></tr></table></figure>
+<p>  *字看狀況可以自行更換成下載對應的版本</p>
+</li>
+</ul>
+</li>
+<li><p>安裝 android studio</p>
+<ul>
+<li><p>使用gui安裝</p>
+<p>  找到解縮的資料夾 android-studio</p>
+<p>  底下有 bin 資料夾</p>
+<p>  進入後執行裡面的 studio.sh</p>
+</li>
+<li><p>使用命令行安裝</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sh ~/Downloads/android-studio/bin/studio.sh</span></span><br></pre></td></tr></table></figure>
+<p>  *字看狀況可以自行更換成下載對應的版本</p>
+</li>
+</ul>
+</li>
+<li><p>設定 Command-line-launcher</p>
+<p>  安裝完後點選開啟一個新專案</p>
+<p>  開好後點選 </p>
+<p>  Tools -&gt; Create Command line Launcher</p>
+<p>  Tools -&gt; Create Desktop Entry</p>
+<p>  開啟命令列確定有安裝 python</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt install python</span><br></pre></td></tr></table></figure></li>
+<li><p>啟動 android studio</p>
+<p>  關掉 android studio ，現在來確認可以開啟</p>
+<p>  command line 輸入</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ studio</span><br></pre></td></tr></table></figure>
+<p>  或是左上角 Applications -&gt; Development -&gt; Android Studio</p>
+<ul>
+<li>有安裝 xiwi</li>
+</ul>
+<p>  退到 chrome 桌面</p>
+<p>  Ctrl+Alt+Tab 後輸入 shell</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo enter-chroot xiwi studio</span><br></pre></td></tr></table></figure></li>
+<li><p>透過 ADB 測試 app</p>
+<p>  開啟Chrome terminal (Ctrl+Alt+Tab 輸入 shell)</p>
+<p>  不想跟著步驟可以自己看著官方教學做 我下面是整理好的步驟<a href="https://developer.android.com/topic/arc/index.html#setup">官方教學(英文)</a></p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo crossystem dev_boot_signed_only=0</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo /usr/libexec/debugd/helpers/dev_features_rootfs_verification</span><br></pre></td></tr></table></figure>
+<p>  執行下面這部會重開機，記得要 Ctrl+D 來進入</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo reboot</span><br></pre></td></tr></table></figure>
+
+<p>  再次開啟Chrome terminal (Ctrl+Alt+T 輸入 shell)</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo /usr/libexec/debugd/helpers/dev_features_ssh</span><br></pre></td></tr></table></figure></li>
+<li><p>開啟 Pixelbook 裡 Android settings 下的 ADB Debugging</p>
+<ul>
+<li>點擊右下角時鐘</li>
+<li>點開設定</li>
+<li>往下滑，找到Google Play Stores</li>
+<li>進入找到 Manage Android preferences</li>
+<li>往下找到 About device 進入</li>
+<li>點擊 build number 七次來開啟開發者模式</li>
+<li>點擊左上返回</li>
+<li>進入開發者選項 ( Developer Options )</li>
+<li>啟用 ADB debugging</li>
+</ul>
+</li>
+<li><p>ADB 連接</p>
+<p>  進入 Chrome terminal (Ctrl+Alt+T 輸入 shell)</p>
+<ul>
+<li>ADB 連接<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ adb connect localhost:22</span><br></pre></td></tr></table></figure>
+正常運作會顯示 connected to localhost:22</li>
+</ul>
+<p>  如果沒顯示，設定可能有錯</p>
+<ul>
+<li>測試 android studio 連接 adb</li>
+</ul>
+<p>  先重啟adb</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ shell adb kill-server</span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ adb connect localhost:22</span><br></pre></td></tr></table></figure>
+<p>  xiwi 啟動 android studio</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo enter-chroot xiwi studio</span><br></pre></td></tr></table></figure>
+<p>  直接 run 應該可以看到 Pixelbook 出現在列表上了</p>
+<p>  這時候就可以直接在 Pixelbook 上安裝及測試</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Chrome OS</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>chrome OS</tag>
+        <tag>chrome book</tag>
+        <tag>pixelbook</tag>
+        <tag>android studio</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo d 時發生 ENOSPC 錯誤</title>
+    <url>/2018/03/11/hexo-d-%E6%99%82%E7%99%BC%E7%94%9F-ENOSPC-%E9%8C%AF%E8%AA%A4/</url>
+    <content><![CDATA[<p>在部屬 hexo 的時候發生錯誤，筆記一下解決方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Error: watch &#x2F;home&#x2F;user&#x2F;Downloads&#x2F;GitHub&#x2F;vn7n24fzkq.github.io&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;wechat-subscriber.swig ENOSPC</span><br><span class="line">    at exports._errnoException (util.js:870:11)</span><br><span class="line">    at FSWatcher.start (fs.js:1234:19)</span><br><span class="line">    at Object.fs.watch (fs.js:1262:11)</span><br><span class="line">    at createFsWatchInstance (&#x2F;home&#x2F;casper&#x2F;Downloads&#x2F;GitHub&#x2F;vn7n24fzkq.github.io&#x2F;node_modules&#x2F;chokidar&#x2F;lib&#x2F;nodefs-handler.js:37:15)</span><br><span class="line">    at setFsWatchListener (&#x2F;home&#x2F;casper&#x2F;Downloads&#x2F;GitHub&#x2F;vn7n24fzkq.github.io&#x2F;node_modules&#x2F;chokidar&#x2F;lib&#x2F;nodefs-handler.js:80:15)</span><br><span class="line">    at FSWatcher.NodeFsHandler._watchWithNodeFs (&#x2F;home&#x2F;casper&#x2F;Downloads&#x2F;GitHub&#x2F;vn7n24fzkq.github.io&#x2F;node_modules&#x2F;chokidar&#x2F;lib&#x2F;nodefs-handler.js:228:14)</span><br><span class="line">    at FSWatcher.NodeFsHandler._handleFile (&#x2F;home&#x2F;casper&#x2F;Downloads&#x2F;GitHub&#x2F;vn7n24fzkq.github.io&#x2F;node_modules&#x2F;chokidar&#x2F;lib&#x2F;nodefs-handler.js:255:21)</span><br><span class="line">    at FSWatcher.&lt;anonymous&gt; (&#x2F;home&#x2F;casper&#x2F;Downloads&#x2F;GitHub&#x2F;vn7n24fzkq.github.io&#x2F;node_modules&#x2F;chokidar&#x2F;lib&#x2F;nodefs-handler.js:473:21)</span><br><span class="line">    at FSReqWrap.oncomplete (fs.js:82:15)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解決方法  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf &amp;&amp; sudo sysctl -p</span><br></pre></td></tr></table></figure>
+這行指令可以增加可以觀看的文件數量</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>hexo</tag>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在pixelbook上建置開發環境</title>
+    <url>/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/</url>
+    <content><![CDATA[<p>今年入手了pixelbook，利用時間把建構開發環境的步驟整理出來</p>
+<hr>
+<h3 id="1-將chrome-os開啟開發者模式"><a href="#1-將chrome-os開啟開發者模式" class="headerlink" title="1.將chrome os開啟開發者模式"></a>1.將chrome os開啟開發者模式</h3><p>(注意，這個步驟會清除原本的所有資料)</p>
+<ul>
+<li> 同時按下esc + refesh + 電源鍵</li>
+</ul>
+<p> refesh就是最右邊那個<br> <img src="/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/pixelbook_refresh_key.jpg"></p>
+<ul>
+<li> 接下來按 Ctrl + D</li>
+</ul>
+<blockquote>
+<p>注意：畫面上不會有任何提示,你自己要知道要這樣做,每次開機都要按</p>
+</blockquote>
+<blockquote>
+<p>當然你也可以按照開機畫面的教學隨時關閉開發者模式,要注意的是每次這樣做都會清除系統資料</p>
+</blockquote>
+<h3 id="2-下載crouton"><a href="#2-下載crouton" class="headerlink" title="2.下載crouton"></a>2.下載crouton</h3><p>crouton及chroot<br>crouton是chrome os下通用的chroot環境<br>chroot則是unix系統下的一種操作環境</p>
+<p>將 crouton 下載到 Downloads 預設資料夾<br><a href="https://goo.gl/fd3zc">下載crouton</a></p>
+<p>GitHub也可以找到Crouton<br><a href="https://github.com/dnschneid/crouton">crouton on GitHub</a></p>
+<h3 id="3-安裝Ubuntu-LTS-with-Xfce"><a href="#3-安裝Ubuntu-LTS-with-Xfce" class="headerlink" title="3.安裝Ubuntu LTS with Xfce"></a>3.安裝Ubuntu LTS with Xfce</h3><ul>
+<li>  打開一個 terminal (Ctrl + Alt + T )</li>
+<li>  輸入 shell 按下 enter</li>
+<li>安裝xfce,安裝結束後輸入使用者名稱跟密碼  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo sh~/Downloads/crouton -t xfce</span><br></pre></td></tr></table></figure>
+有任何做錯的可以直接用這兩個指令 在從這一步重新開始</li>
+</ul>
+<p>1.顯示所有安裝的chroot<br>2.刪除指定的chroot( chrootname 換成要刪除的那個,預設安裝名稱是 xenial )</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo edit-chroot -a</span><br><span class="line">$ sudo edit-chroot -d chrootname</span><br></pre></td></tr></table></figure>
+
+<p>到這裡已經完成了大部分的步驟</p>
+<h3 id="4-成為ubuntu大神"><a href="#4-成為ubuntu大神" class="headerlink" title="4.成為ubuntu大神"></a>4.成為ubuntu大神</h3><ul>
+<li><p>進入chroot</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo enter-chroot</span><br></pre></td></tr></table></figure></li>
+<li><p>開始安裝任何東西</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get install git</span><br><span class="line">$ sudo apt-get install curl</span><br></pre></td></tr></table></figure>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4></li>
+<li><p>在桌面開啟xfce</p>
+<ul>
+<li>  打開 terminal (Ctrl + Alt + T )</li>
+<li>  輸入 shell 按下 enter </li>
+<li>開啟xfce  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo enter-chroot startxfce4</span><br></pre></td></tr></table></figure>
+  或  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo startxfce4</span><br></pre></td></tr></table></figure>
+  用 Ctrl + Alt + Shift + Back 和 Ctrl + Alt + Shift + Forward 在 xfce 和 chrome os 的桌面切換</li>
+</ul>
+</li>
+<li><p>在 chrome tab 或一個新的視窗中開啟 xfce</p>
+<ul>
+<li>  在 chrome 中加入 <a href="https://chrome.google.com/webstore/detail/crouton-integration/gcpneefbbnfalgjniomfjknbcgkbijom">crouton integration</a></li>
+<li>安裝 xiwi 然後設置為預設的開啟方式<br>  xenail 換成 你 chroot 的名稱,xenial 是預設名稱  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo sh ~/Downloads/crouton -t xiwi -u -n xenial</span><br></pre></td></tr></table></figure></li>
+<li>在新視窗開啟 xfce  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ xiwi startxfce4</span><br></pre></td></tr></table></figure>
+  在 chrome tab 開啟 xfce  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ xiwi -t startxfce4</span><br></pre></td></tr></table></figure>
+也可以獨立開啟應用程式<br>像我使用 vscode<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ xiwi -t code</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p>這篇文章也是在 vscode 下完成的<br>剩下其他的設定下次在發篇文章</p>
+]]></content>
+      <categories>
+        <category>Chrome OS</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>chrome OS</tag>
+        <tag>chrome book</tag>
+        <tag>pixelbook</tag>
+        <tag>crouton</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在GCP上建立額外的SSH-SERVER</title>
+    <url>/2019/03/14/%E5%9C%A8GCP%E4%B8%8A%E5%BB%BA%E7%AB%8B%E9%A1%8D%E5%A4%96%E7%9A%84SSH-SERVER/</url>
+    <content><![CDATA[<p>最近辦了新域名想說另外開個port來用密碼登入ssh<br>因為不想在預設port使用密碼登入<br>把步驟記錄一下,不過來源是stackorflow,所以算是翻譯(？<br>來源網址 : <a href="https://askubuntu.com/questions/324503/2-sshd-configurations-1-for-internal-and-1-external">2 sshd configurations 1 for internal and 1 external</a></p>
+<ul>
+<li><p>第一步 複製原本ssh server的設定檔</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo cp &#x2F;etc&#x2F;ssh&#x2F;sshd_config &#x2F;etc&#x2F;ssh&#x2F;sshd_config_external</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步 複製原本 ssh server 的 service 腳本</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo cp &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;ssh.service &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;sshd-external.service</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>更改 /lib/systemd/system/sshd-external.service 檔案內容</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;sshd -D $SSHD_OPTS </span><br><span class="line">改成</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;sshd -D $SSHD_OPTS -f &#x2F;etc&#x2F;ssh&#x2F;sshd_config_external</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第三步</p>
+<ul>
+<li><p>設定額外新的設定檔像是把port從22換到別的port</p>
+</li>
+<li><p>要改的檔案 /etc/ssh/sshd_config_external</p>
+</li>
+<li><p>改port的話 </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Port 22</span><br><span class="line">改成你想要的port</span><br><span class="line">Port 9999</span><br></pre></td></tr></table></figure></li>
+<li><p>允許密碼登入</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PasswordAuthentication no</span><br><span class="line">改成</span><br><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第四步</p>
+<ul>
+<li><p>讓新的ssh server能夠在開機時自動啟動</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo systemctl enable sshd-external.service</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第五步 啟動！！</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo service sshd-external start</span><br></pre></td></tr></table></figure></li>
+<li><p>這樣應該就可以連上去了</p>
+</li>
+<li><p>對了,新開啟的port記得去開GCP的防火牆喔</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>GCP</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>gcp</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用四叉樹來對bmp與tiff實做圖像壓縮</title>
+    <url>/2018/01/13/%E7%94%A8%E5%9B%9B%E5%8F%89%E6%A8%B9%E4%BE%86%E5%B0%8Dbmp%E8%88%87tiff%E5%AF%A6%E5%81%9A%E5%9C%96%E5%83%8F%E5%A3%93%E7%B8%AE/</url>
+    <content><![CDATA[<p>先簡單介紹一下四叉樹QuadTree，四叉樹是一個樹狀的資料結構，經常運用在畫面處理或是2D的碰撞檢測。<br>從根節點root出發，當節點內達到一個條件的時候會再分裂成四個子節點。<br>詳細的介紹可以看<a href="https://en.wikipedia.org/wiki/Quadtree">Quadtree - Wikipedia</a><br>樹可能會長這樣(圖片取自wiki)</p>
+<div style="background-color:#ffffff;padding:10px;margin-bottom:5px;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Quad_tree_bitmap.svg/680px-Quad_tree_bitmap.svg.png"></div>
+一般狀況下圖片會有RGB三原色，值是0~255，這次我設定四叉樹節點分裂的條件是區域內的RGB顏色離散程度到某個值就分裂。
+`離散程度0到1，越接近0離散程度越低，mu則是區域內RGB的平均值`
+<div style="background-color:#ffffff;padding:10px;margin-bottom:5px;">
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9b69670d2d67aa5818c03f3a520a547a583004fe">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/400px-Standard_deviation_diagram.svg.png"></div>
+接下來進入正題，要做壓縮的圖片有兩張。
+
+<p><img src="https://raw.githubusercontent.com/vn7n24fzkq/data-compression/master/Quadtree%20Compression/test%20files/Peppers.bmp"><br><img src="https://raw.githubusercontent.com/vn7n24fzkq/data-compression/master/Quadtree%20Compression/test%20files/PeppersRGB.bmp"><br>把圖片讀進來後在<code>compress</code>這個method裡面做處理。如果有tiff檔無法讀取的狀況，請加入<a href="https://github.com/jai-imageio/jai-imageio-core">jai-imageio-core</a>這個lib</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BufferedImage <span class="title">compress</span><span class="params">(BufferedImage image, <span class="keyword">double</span> threshold)</span> </span>&#123;</span><br><span class="line">    Color[][] colors = makeColorArray(image);</span><br><span class="line">    <span class="keyword">int</span> width = image.getWidth();</span><br><span class="line">    <span class="keyword">int</span> height = image.getHeight();</span><br><span class="line">    QuadTree quadTree = <span class="keyword">new</span> QuadTree(colors, <span class="keyword">new</span> ImageMeasure(), threshold);</span><br><span class="line">    BufferedImage outImage = <span class="keyword">new</span> BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; width; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; height; j++) &#123;</span><br><span class="line">            outImage.setRGB(i, j, quadTree.get(i, j).getRGB());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> outImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>threshold是設定離散程度到多少要分裂<br>這裡寫個一個ImageMeasure類別來對圖像讀進來的資料作運算<br><code>approximate</code>運算區域內像素的色彩近似值<br><code>measureDetail</code>運算區域內色彩的離散程度</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Color <span class="title">approximate</span><span class="params">(Color[][] data, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> redSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> greenSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> blueSum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt; x + width; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = y; j &lt; y + height; j++) &#123;</span><br><span class="line">            redSum += data[i][j].getRed();</span><br><span class="line">            greenSum += data[i][j].getGreen();</span><br><span class="line">            blueSum += data[i][j].getBlue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pixelCount = width * height;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Color(redSum / pixelCount, greenSum / pixelCount, blueSum / pixelCount);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">measureDetail</span><span class="params">(Color[][] data, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> redSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> greenSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> blueSum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt; x + width; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = y; j &lt; y + height; j++) &#123;</span><br><span class="line">            redSum += data[i][j].getRed();</span><br><span class="line">            greenSum += data[i][j].getGreen();</span><br><span class="line">            blueSum += data[i][j].getBlue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> pixelCount = width * height;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">double</span> redAvg = redSum / pixelCount;</span><br><span class="line">    <span class="keyword">double</span> greenAvg = greenSum / pixelCount;</span><br><span class="line">    <span class="keyword">double</span> blueAvg = blueSum / pixelCount;</span><br><span class="line"></span><br><span class="line">    redSum = <span class="number">0</span>;</span><br><span class="line">    greenSum = <span class="number">0</span>;</span><br><span class="line">    blueSum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i &lt; x + width; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = y; j &lt; y + height; j++) &#123;</span><br><span class="line">            <span class="keyword">int</span> red = data[i][j].getRed();</span><br><span class="line">            <span class="keyword">int</span> green = data[i][j].getGreen();</span><br><span class="line">            <span class="keyword">int</span> blue = data[i][j].getBlue();</span><br><span class="line"></span><br><span class="line">            redSum += Math.pow(red - redAvg, <span class="number">2</span>);</span><br><span class="line">            greenSum += Math.pow(green - greenAvg, <span class="number">2</span>);</span><br><span class="line">            blueSum += Math.pow(blue - blueAvg, <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> redSum / (pixelCount * <span class="number">255</span> * <span class="number">255</span>) + greenSum / (pixelCount * <span class="number">255</span> * <span class="number">255</span>) + blueSum / (pixelCount * <span class="number">255</span> * <span class="number">255</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>quadtree中新增節點的時候則看運算的結果來決定要不要分裂以及節點的顏色近似值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(Color data[][], <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">    <span class="keyword">this</span>.width = width;</span><br><span class="line">    <span class="keyword">this</span>.height = height;</span><br><span class="line">    <span class="keyword">if</span> ((width == <span class="number">1</span>) || (height == <span class="number">1</span>) || (measure.measureDetail(data, x, y, width, height) &lt;= threshold)) &#123;</span><br><span class="line">        value = measure.approximate(data, x, y, width, height);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        children = <span class="keyword">new</span> Node[<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line">        children[<span class="number">0</span>] = <span class="keyword">new</span> Node(data, x, y, width / <span class="number">2</span>, height / <span class="number">2</span>);</span><br><span class="line">        children[<span class="number">1</span>] = <span class="keyword">new</span> Node(data, x + width / <span class="number">2</span>, y, width - width / <span class="number">2</span>, height / <span class="number">2</span>);</span><br><span class="line">        children[<span class="number">2</span>] = <span class="keyword">new</span> Node(data, x, y + height / <span class="number">2</span>, width / <span class="number">2</span>, height - height / <span class="number">2</span>);</span><br><span class="line">        children[<span class="number">3</span>] = <span class="keyword">new</span> Node(data, x + width / <span class="number">2</span>, y + height / <span class="number">2</span>, width - width / <span class="number">2</span>, height - height / <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這是運算之後的結果<br><img src="https://raw.githubusercontent.com/vn7n24fzkq/data-compression/master/Quadtree%20Compression/test%20files/compressed/5Peppers.bmp"><br><img src="https://raw.githubusercontent.com/vn7n24fzkq/data-compression/master/Quadtree%20Compression/test%20files/compressed/5PeppersRGB.bmp"><br>完整程式碼在這裡<br><a href="https://github.com/vn7n24fzkq/data-compression/tree/master/Quadtree%20Compression">Quadtree Compression</a></p>
+]]></content>
+      <categories>
+        <category>Data-Compression</category>
+      </categories>
+      <tags>
+        <tag>quadtree</tag>
+        <tag>data compression</tag>
+        <tag>java</tag>
+      </tags>
+  </entry>
+</search>

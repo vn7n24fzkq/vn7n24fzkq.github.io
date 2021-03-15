@@ -20,15 +20,22 @@
     var CONFIG = {"hostname":"vn7n24fzkq.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="vn7&#39;blog">
-<meta property="og:url" content="https://vn7n24fzkq.github.io/archives/index.html">
+  <meta name="description" content="最近辦了新域名想說另外開個port來用密碼登入ssh因為不想在預設port使用密碼登入把步驟記錄一下,不過來源是stackorflow,所以算是翻譯(？來源網址 : 2 sshd configurations 1 for internal and 1 external  第一步 複製原本ssh server的設定檔   1$ sudo cp &#x2F;etc&#x2F;ssh&#x2F;sshd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在GCP上建立額外的SSH-SERVER">
+<meta property="og:url" content="https://vn7n24fzkq.github.io/2019/03/14/%E5%9C%A8GCP%E4%B8%8A%E5%BB%BA%E7%AB%8B%E9%A1%8D%E5%A4%96%E7%9A%84SSH-SERVER/index.html">
 <meta property="og:site_name" content="vn7&#39;blog">
+<meta property="og:description" content="最近辦了新域名想說另外開個port來用密碼登入ssh因為不想在預設port使用密碼登入把步驟記錄一下,不過來源是stackorflow,所以算是翻譯(？來源網址 : 2 sshd configurations 1 for internal and 1 external  第一步 複製原本ssh server的設定檔   1$ sudo cp &#x2F;etc&#x2F;ssh&#x2F;sshd">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2019-03-13T17:57:24.000Z">
+<meta property="article:modified_time" content="2021-03-15T13:30:34.728Z">
 <meta property="article:author" content="vn7n24fzkq">
+<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="gcp">
+<meta property="article:tag" content="ssh">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://vn7n24fzkq.github.io/archives/">
+<link rel="canonical" href="https://vn7n24fzkq.github.io/2019/03/14/%E5%9C%A8GCP%E4%B8%8A%E5%BB%BA%E7%AB%8B%E9%A1%8D%E5%A4%96%E7%9A%84SSH-SERVER/">
 
 
 <script id="page-configurations">
@@ -36,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-TW'
   };
 </script>
 
-  <title>歸檔 | vn7'blog</title>
+  <title>在GCP上建立額外的SSH-SERVER | vn7'blog</title>
   
 
 
@@ -187,133 +194,134 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共有 5 篇文章。 繼續努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://vn7n24fzkq.github.io/2019/03/14/%E5%9C%A8GCP%E4%B8%8A%E5%BB%BA%E7%AB%8B%E9%A1%8D%E5%A4%96%E7%9A%84SSH-SERVER/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/20241522">
+      <meta itemprop="name" content="vn7n24fzkq">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vn7'blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在GCP上建立額外的SSH-SERVER
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2019-03-14 01:57:24" itemprop="dateCreated datePublished" datetime="2019-03-14T01:57:24+08:00">2019-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-15 21:30:34" itemprop="dateModified" datetime="2021-03-15T21:30:34+08:00">2021-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/GCP/" itemprop="url" rel="index"><span itemprop="name">GCP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2019</span>
-    </div>
+        <p>最近辦了新域名想說另外開個port來用密碼登入ssh<br>因為不想在預設port使用密碼登入<br>把步驟記錄一下,不過來源是stackorflow,所以算是翻譯(？<br>來源網址 : <a target="_blank" rel="noopener" href="https://askubuntu.com/questions/324503/2-sshd-configurations-1-for-internal-and-1-external">2 sshd configurations 1 for internal and 1 external</a></p>
+<ul>
+<li><p>第一步 複製原本ssh server的設定檔</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp &#x2F;etc&#x2F;ssh&#x2F;sshd_config &#x2F;etc&#x2F;ssh&#x2F;sshd_config_external</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步 複製原本 ssh server 的 service 腳本</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;ssh.service &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;sshd-external.service</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-03-14T01:57:24+08:00"
-              content="2019-03-14">
-          03-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2019/03/14/%E5%9C%A8GCP%E4%B8%8A%E5%BB%BA%E7%AB%8B%E9%A1%8D%E5%A4%96%E7%9A%84SSH-SERVER/" itemprop="url">
-            <span itemprop="name">在GCP上建立額外的SSH-SERVER</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2018</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-03-11T21:26:13+08:00"
-              content="2018-03-11">
-          03-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/03/11/Piexlebook-%E4%B8%8A%E5%AF%AB-android-app-%E4%B8%A6%E5%9F%B7%E8%A1%8C/" itemprop="url">
-            <span itemprop="name">在 pixelbook 上寫 android app 並執行</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-03-11T18:04:43+08:00"
-              content="2018-03-11">
-          03-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/03/11/hexo-d-%E6%99%82%E7%99%BC%E7%94%9F-ENOSPC-%E9%8C%AF%E8%AA%A4/" itemprop="url">
-            <span itemprop="name">hexo d 時發生 ENOSPC 錯誤</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-02-27T01:48:45+08:00"
-              content="2018-02-27">
-          02-27
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/02/27/Pixelbook-%E4%B8%8A%E5%BB%BA%E7%BD%AE%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83/" itemprop="url">
-            <span itemprop="name">在pixelbook上建置開發環境</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2018-01-13T00:00:00+08:00"
-              content="2018-01-13">
-          01-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2018/01/13/%E7%94%A8%E5%9B%9B%E5%8F%89%E6%A8%B9%E4%BE%86%E5%B0%8Dbmp%E8%88%87tiff%E5%AF%A6%E5%81%9A%E5%9C%96%E5%83%8F%E5%A3%93%E7%B8%AE/" itemprop="url">
-            <span itemprop="name">用四叉樹來對bmp與tiff實做圖像壓縮</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<ul>
+<li><p>更改 /lib/systemd/system/sshd-external.service 檔案內容</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;sshd -D $SSHD_OPTS </span><br><span class="line">改成</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;sshd -D $SSHD_OPTS -f &#x2F;etc&#x2F;ssh&#x2F;sshd_config_external</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第三步</p>
+<ul>
+<li><p>設定額外新的設定檔像是把port從22換到別的port</p>
+</li>
+<li><p>要改的檔案 /etc/ssh/sshd_config_external</p>
+</li>
+<li><p>改port的話 </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Port 22</span><br><span class="line">改成你想要的port</span><br><span class="line">Port 9999</span><br></pre></td></tr></table></figure></li>
+<li><p>允許密碼登入</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PasswordAuthentication no</span><br><span class="line">改成</span><br><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第四步</p>
+<ul>
+<li><p>讓新的ssh server能夠在開機時自動啟動</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl enable sshd-external.service</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第五步 啟動！！</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service sshd-external start</span><br></pre></td></tr></table></figure></li>
+<li><p>這樣應該就可以連上去了</p>
+</li>
+<li><p>對了,新開啟的port記得去開GCP的防火牆喔</p>
+</li>
+</ul>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+              <a href="/tags/gcp/" rel="tag"># gcp</a>
+              <a href="/tags/ssh/" rel="tag"># ssh</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/11/Piexlebook-%E4%B8%8A%E5%AF%AB-android-app-%E4%B8%A6%E5%9F%B7%E8%A1%8C/" rel="prev" title="在 pixelbook 上寫 android app 並執行">
+      <i class="fa fa-chevron-left"></i> 在 pixelbook 上寫 android app 並執行
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
