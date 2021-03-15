@@ -112,6 +112,57 @@
       </tags>
   </entry>
   <entry>
+    <title>在GCP上建立額外的SSH-SERVER</title>
+    <url>/2019/03/14/%E5%9C%A8GCP%E4%B8%8A%E5%BB%BA%E7%AB%8B%E9%A1%8D%E5%A4%96%E7%9A%84SSH-SERVER/</url>
+    <content><![CDATA[<p>最近辦了新域名想說另外開個port來用密碼登入ssh<br>因為不想在預設port使用密碼登入<br>把步驟記錄一下,不過來源是stackorflow,所以算是翻譯(？<br>來源網址 : <a href="https://askubuntu.com/questions/324503/2-sshd-configurations-1-for-internal-and-1-external">2 sshd configurations 1 for internal and 1 external</a></p>
+<ul>
+<li><p>第一步 複製原本ssh server的設定檔</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo cp &#x2F;etc&#x2F;ssh&#x2F;sshd_config &#x2F;etc&#x2F;ssh&#x2F;sshd_config_external</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二步 複製原本 ssh server 的 service 腳本</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo cp &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;ssh.service &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;sshd-external.service</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>更改 /lib/systemd/system/sshd-external.service 檔案內容</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;sshd -D $SSHD_OPTS </span><br><span class="line">改成</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;sshd -D $SSHD_OPTS -f &#x2F;etc&#x2F;ssh&#x2F;sshd_config_external</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第三步</p>
+<ul>
+<li><p>設定額外新的設定檔像是把port從22換到別的port</p>
+</li>
+<li><p>要改的檔案 /etc/ssh/sshd_config_external</p>
+</li>
+<li><p>改port的話 </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Port 22</span><br><span class="line">改成你想要的port</span><br><span class="line">Port 9999</span><br></pre></td></tr></table></figure></li>
+<li><p>允許密碼登入</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PasswordAuthentication no</span><br><span class="line">改成</span><br><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第四步</p>
+<ul>
+<li><p>讓新的ssh server能夠在開機時自動啟動</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo systemctl enable sshd-external.service</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>第五步 啟動！！</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo service sshd-external start</span><br></pre></td></tr></table></figure></li>
+<li><p>這樣應該就可以連上去了</p>
+</li>
+<li><p>對了,新開啟的port記得去開GCP的防火牆喔</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>GCP</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+        <tag>gcp</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo d 時發生 ENOSPC 錯誤</title>
     <url>/2018/03/11/hexo-d-%E6%99%82%E7%99%BC%E7%94%9F-ENOSPC-%E9%8C%AF%E8%AA%A4/</url>
     <content><![CDATA[<p>在部屬 hexo 的時候發生錯誤，筆記一下解決方法</p>
@@ -199,57 +250,6 @@
         <tag>chrome book</tag>
         <tag>pixelbook</tag>
         <tag>crouton</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在GCP上建立額外的SSH-SERVER</title>
-    <url>/2019/03/14/%E5%9C%A8GCP%E4%B8%8A%E5%BB%BA%E7%AB%8B%E9%A1%8D%E5%A4%96%E7%9A%84SSH-SERVER/</url>
-    <content><![CDATA[<p>最近辦了新域名想說另外開個port來用密碼登入ssh<br>因為不想在預設port使用密碼登入<br>把步驟記錄一下,不過來源是stackorflow,所以算是翻譯(？<br>來源網址 : <a href="https://askubuntu.com/questions/324503/2-sshd-configurations-1-for-internal-and-1-external">2 sshd configurations 1 for internal and 1 external</a></p>
-<ul>
-<li><p>第一步 複製原本ssh server的設定檔</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo cp &#x2F;etc&#x2F;ssh&#x2F;sshd_config &#x2F;etc&#x2F;ssh&#x2F;sshd_config_external</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第二步 複製原本 ssh server 的 service 腳本</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo cp &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;ssh.service &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;sshd-external.service</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>更改 /lib/systemd/system/sshd-external.service 檔案內容</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;sshd -D $SSHD_OPTS </span><br><span class="line">改成</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;sbin&#x2F;sshd -D $SSHD_OPTS -f &#x2F;etc&#x2F;ssh&#x2F;sshd_config_external</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>第三步</p>
-<ul>
-<li><p>設定額外新的設定檔像是把port從22換到別的port</p>
-</li>
-<li><p>要改的檔案 /etc/ssh/sshd_config_external</p>
-</li>
-<li><p>改port的話 </p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Port 22</span><br><span class="line">改成你想要的port</span><br><span class="line">Port 9999</span><br></pre></td></tr></table></figure></li>
-<li><p>允許密碼登入</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">PasswordAuthentication no</span><br><span class="line">改成</span><br><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>第四步</p>
-<ul>
-<li><p>讓新的ssh server能夠在開機時自動啟動</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo systemctl enable sshd-external.service</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>第五步 啟動！！</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo service sshd-external start</span><br></pre></td></tr></table></figure></li>
-<li><p>這樣應該就可以連上去了</p>
-</li>
-<li><p>對了,新開啟的port記得去開GCP的防火牆喔</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>GCP</category>
-      </categories>
-      <tags>
-        <tag>ubuntu</tag>
-        <tag>gcp</tag>
-        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
